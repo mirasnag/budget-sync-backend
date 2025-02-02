@@ -7,8 +7,11 @@ import {
   updateAsset,
 } from "./asset-controller";
 import { validateObjectId } from "../middleware/validateObjectId";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // get all assets
 router.get("/", getAssets);

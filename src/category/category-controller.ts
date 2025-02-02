@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { CategoryModel } from "./category.model";
+import { CategoryModel } from "./category-model";
+import { getErrorMessage } from "../utils/error";
 
 // get all categories
 export const getCategories = async (req: Request, res: Response) => {
@@ -7,7 +8,7 @@ export const getCategories = async (req: Request, res: Response) => {
     const categories = await CategoryModel.find({}).sort({ createdAt: -1 });
     res.status(200).json({ categories });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -25,7 +26,7 @@ export const getCategory = async (req: Request, res: Response) => {
 
     res.status(200).json({ category });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -64,7 +65,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
 
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -85,6 +86,6 @@ export const updateCategory = async (req: Request, res: Response) => {
 
     res.status(200).json({ category });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };

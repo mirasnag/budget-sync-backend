@@ -7,8 +7,11 @@ import {
   updateCategory,
 } from "./category-controller";
 import { validateObjectId } from "../middleware/validateObjectId";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // get all categories
 router.get("/", getCategories);

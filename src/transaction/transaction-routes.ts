@@ -7,8 +7,11 @@ import {
   updateTransaction,
 } from "./transaction-controller";
 import { validateObjectId } from "../middleware/validateObjectId";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // get all transactions
 router.get("/", getTransactions);

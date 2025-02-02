@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { AssetModel } from "./asset.model";
+import { AssetModel } from "./asset-model";
+import { getErrorMessage } from "../utils/error";
 
 // get all assets
 export const getAssets = async (req: Request, res: Response) => {
@@ -7,7 +8,7 @@ export const getAssets = async (req: Request, res: Response) => {
     const assets = await AssetModel.find({}).sort({ createdAt: -1 });
     res.status(200).json({ assets });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -24,7 +25,7 @@ export const getAsset = async (req: Request, res: Response) => {
 
     res.status(200).json({ asset });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -58,7 +59,7 @@ export const deleteAsset = async (req: Request, res: Response) => {
 
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -77,6 +78,6 @@ export const updateAsset = async (req: Request, res: Response) => {
 
     res.status(200).json({ asset });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };

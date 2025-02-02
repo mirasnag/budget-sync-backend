@@ -1,11 +1,19 @@
+// library imports
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
+
+// config
 import { config } from "./config/config";
+
+// middleware
 import { loggerMiddleware } from "./middleware/logger";
+
+// routers
 import AssetRouter from "./asset/asset-routes";
 import CategoryRouter from "./category/category-routes";
 import TransactionRouter from "./transaction/transaction-routes";
 import SourceRouter from "./source/source-routes";
+import UserRouter from "./user/user-routes";
 
 const app = express();
 const PORT = config.port;
@@ -27,6 +35,8 @@ app.use("/api/categories", CategoryRouter);
 app.use("/api/sources", SourceRouter);
 
 app.use("/api/transactions", TransactionRouter);
+
+app.use("/api/user", UserRouter);
 
 // connect to db
 mongoose

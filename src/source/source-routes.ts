@@ -7,8 +7,11 @@ import {
   updateSource,
 } from "./source-controller";
 import { validateObjectId } from "../middleware/validateObjectId";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // get all sources
 router.get("/", getSources);

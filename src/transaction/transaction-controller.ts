@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { TransactionModel } from "./transaction.model";
+import { TransactionModel } from "./transaction-model";
+import { getErrorMessage } from "../utils/error";
 
 // get all transactions
 export const getTransactions = async (req: Request, res: Response) => {
@@ -9,7 +10,7 @@ export const getTransactions = async (req: Request, res: Response) => {
     });
     res.status(200).json({ transactions });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -27,7 +28,7 @@ export const getTransaction = async (req: Request, res: Response) => {
 
     res.status(200).json({ transaction });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -69,7 +70,7 @@ export const deleteTransaction = async (req: Request, res: Response) => {
 
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -90,6 +91,6 @@ export const updateTransaction = async (req: Request, res: Response) => {
 
     res.status(200).json({ transaction });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { SourceModel } from "./source.model";
+import { SourceModel } from "./source-model";
+import { getErrorMessage } from "../utils/error";
 
 // get all sources
 export const getSources = async (req: Request, res: Response) => {
@@ -7,7 +8,7 @@ export const getSources = async (req: Request, res: Response) => {
     const sources = await SourceModel.find({}).sort({ createdAt: -1 });
     res.status(200).json({ sources });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -24,7 +25,7 @@ export const getSource = async (req: Request, res: Response) => {
 
     res.status(200).json({ source });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -58,7 +59,7 @@ export const deleteSource = async (req: Request, res: Response) => {
 
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };
 
@@ -79,6 +80,6 @@ export const updateSource = async (req: Request, res: Response) => {
 
     res.status(200).json({ source });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send(getErrorMessage(error));
   }
 };

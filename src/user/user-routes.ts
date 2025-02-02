@@ -1,5 +1,5 @@
 import express from "express";
-import { loginUser, singupUser } from "./auth-controller";
+import { loginUser, signupUser } from "./user-controller";
 
 const router = express.Router();
 
@@ -7,6 +7,6 @@ const router = express.Router();
 router.post("/login", loginUser);
 
 // signup
-router.post("/signup", singupUser);
+router.post("/signup", signupUser);
 
 export default router;
