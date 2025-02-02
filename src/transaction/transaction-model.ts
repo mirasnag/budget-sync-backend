@@ -4,6 +4,7 @@ import { TransactionType } from "../common/constants";
 export interface ITransaction extends Document {
   type: TransactionType;
   name: string;
+  user_id: string;
   src?: mongoose.Types.ObjectId;
   dst?: mongoose.Types.ObjectId;
   srcAmount?: number;
@@ -20,6 +21,7 @@ const TransactionSchema = new Schema<ITransaction>(
       required: true,
     },
     name: { type: String, required: true },
+    user_id: { type: String, required: true },
     src: { type: Schema.Types.ObjectId },
     dst: { type: Schema.Types.ObjectId },
     srcAmount: { type: Number },

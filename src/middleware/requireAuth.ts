@@ -2,10 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { config } from "../config/config";
 import { UserModel } from "../user/user-model";
-
-interface AuthenticatedRequest extends Request {
-  user?: { _id: string };
-}
+import { AuthenticatedRequest } from "../common/types";
 
 export const requireAuth = async (
   req: AuthenticatedRequest,

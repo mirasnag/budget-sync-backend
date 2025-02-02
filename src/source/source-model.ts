@@ -4,6 +4,7 @@ import { EntityType } from "../common/constants";
 export interface ISource extends Document {
   type: EntityType;
   name: string;
+  user_id: string;
   currency?: string;
 }
 
@@ -15,6 +16,7 @@ const SourceSchema = new Schema<ISource>(
       required: true,
     },
     name: { type: String, required: true },
+    user_id: { type: String, required: true },
     currency: { type: String },
   },
   { timestamps: true }

@@ -4,6 +4,7 @@ import { EntityType } from "../common/constants";
 export interface IAsset extends Document {
   type: EntityType;
   name: string;
+  user_id: string;
   currency?: string;
 }
 
@@ -16,6 +17,7 @@ const AssetSchema = new Schema<IAsset>(
     },
     name: { type: String, required: true },
     currency: { type: String },
+    user_id: { type: String, required: true },
   },
   { timestamps: true }
 );

@@ -4,6 +4,7 @@ import { EntityType } from "../common/constants";
 export interface ICategory extends Document {
   type: EntityType;
   name: string;
+  user_id: string;
   currency?: string;
   amount: number;
 }
@@ -16,6 +17,7 @@ const CategorySchema = new Schema<ICategory>(
       required: true,
     },
     name: { type: String, required: true },
+    user_id: { type: String, required: true },
     currency: { type: String },
     amount: { type: Number, required: true }, // Monthly budget amount
   },
