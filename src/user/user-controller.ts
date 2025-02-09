@@ -20,7 +20,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.status(200).json({ email, token });
   } catch (error) {
-    res.status(500).send(getErrorMessage(error));
+    res.status(500).json({ error: getErrorMessage(error) });
   }
 };
 
@@ -36,6 +36,6 @@ export const signupUser = async (req: Request, res: Response) => {
 
     res.status(200).json({ email, token });
   } catch (error) {
-    res.status(500).send(getErrorMessage(error));
+    res.status(500).json({ error: getErrorMessage(error) });
   }
 };

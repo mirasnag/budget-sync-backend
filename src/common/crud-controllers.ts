@@ -7,10 +7,11 @@ import { AuthenticatedRequest } from "./types";
 export const getAll =
   (model: Model<any>) => async (req: AuthenticatedRequest, res: Response) => {
     try {
-      const items = await model.find({}).sort({ createdAt: -1 });
+      const user_id = req.user?._id;
+      const items = await model.find({ user_id }).sort({ createdAt: -1 });
       res.status(200).json(items);
     } catch (error) {
-      res.status(500).send(getErrorMessage(error));
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   };
 
@@ -25,7 +26,7 @@ export const getOne =
       }
       res.status(200).json(item);
     } catch (error) {
-      res.status(500).send(getErrorMessage(error));
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   };
 
@@ -36,7 +37,7 @@ export const createOne =
       const item = await model.create({ ...req.body, user_id });
       res.status(201).json(item);
     } catch (error) {
-      res.status(500).send(getErrorMessage(error));
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   };
 
@@ -51,7 +52,7 @@ export const updateOne =
       }
       res.status(200).json(item);
     } catch (error) {
-      res.status(500).send(getErrorMessage(error));
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   };
 
@@ -64,8 +65,8 @@ export const deleteOne =
         res.status(404).json({ error: "Not found" });
         return;
       }
-      res.status(204).send();
+      res.status(204).json();
     } catch (error) {
-      res.status(500).send(getErrorMessage(error));
+      res.status(500).json({ error: getErrorMessage(error) });
     }
   };

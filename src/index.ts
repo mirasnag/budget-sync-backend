@@ -17,6 +17,7 @@ import UserRouter from "./user/user-routes";
 
 const app = express();
 const PORT = config.port;
+mongoose.Schema.Types.String.checkRequired((v) => typeof v === "string");
 
 // middleware
 app.use(express.json());
